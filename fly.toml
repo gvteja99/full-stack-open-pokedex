@@ -1,4 +1,4 @@
-# fly.toml app configuration file generated for wispy-paper-4638 on 2023-08-07T13:13:02-07:00
+# fly.toml app configuration file generated for spring-forest-5496 on 2023-08-07T13:39:18-07:00
 #
 # See https://fly.io/docs/reference/configuration/ for information about how to use this file.
 #
@@ -14,7 +14,7 @@ primary_region = "lax"
 
 [build]
   [build.args]
-    NODE_VERSION = "16.19.1"
+    NODE_VERSION = "16.20.1"
 
 [http_service]
   internal_port = 8080
