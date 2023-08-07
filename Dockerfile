@@ -1,7 +1,5 @@
-# syntax = docker/dockerfile:1
-
-# Adjust NODE_VERSION as desired
-ARG NODE_VERSION=16.20.1
+# Use a base image with Node.js
+ARG NODE_VERSION=16.19.1
 FROM node:${NODE_VERSION}-slim as base
 
 LABEL fly_launch_runtime="Node.js"
@@ -10,7 +8,7 @@ LABEL fly_launch_runtime="Node.js"
 WORKDIR /app
 
 # Set production environment
-ENV NODE_ENV="production"
+ENV NODE_ENV=production
 
 
 # Throw-away build stage to reduce size of final image
@@ -18,7 +16,7 @@ FROM base as build
 
 # Install packages needed to build node modules
 RUN apt-get update -qq && \
-    apt-get install -y build-essential pkg-config python
+    apt-get install -y python pkg-config build-essential 
 
 # Install node modules
 COPY --link package-lock.json package.json ./
@@ -41,5 +39,5 @@ FROM base
 COPY --from=build /app /app
 
 # Start the server by default, this can be overwritten at runtime
-EXPOSE 8080
-CMD [ "npm", "run", "start-prod" ]
+EXPOSE 3000
+CMD [ "npm", "run", "start" ]
